@@ -15,6 +15,7 @@
 #include <iostream>
 #include <string>
 #include <stdlib.h>
+#include <stdio.h>
 
 using namespace std;
 
@@ -37,14 +38,12 @@ int userNum;
 int main() {
 
     //welcome to the guessing game
-    putchar("Welcome to the guessing game! \n");
+    cout << "Welcome to the guessing game! \n" << endl;
 
     //ready player one
-    std::cout << "Are you ready to play? (Y/N): \n" << endl;
+    cout << "Are you ready to play? (Y/N): \n" << endl;
     //user ready response
-    std::cin >> userReady;
-    //to lowercase
-    userReady = tolower(userReady);
+    cin >> userReady;
 
 
     //game
@@ -53,7 +52,7 @@ int main() {
         //ask user to guess a number
         printf("Enter number from %d to %d \n", low, high);
         //get user input
-        std::cin >> userNum;
+        cin >> userNum;
 
         if (userNum == randNum) {
             cout << "You Win! \n" << endl;
@@ -72,8 +71,6 @@ int main() {
         cout << "Play again? (Y/N): \n" << endl;
         //user ready response
         cin >> userReady;
-        //to lowercase
-        userReady = tolower(userReady);
     }
 
     return 0;
