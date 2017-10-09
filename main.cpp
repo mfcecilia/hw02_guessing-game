@@ -14,6 +14,7 @@
 
 #include <iostream>
 #include <string>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -23,9 +24,6 @@ int high = 10;
 
 //ready?
 string userReady;
-
-//play?
-bool play;
 
 //computer random number
 int randNum = (rand()%high)+low;
@@ -39,101 +37,44 @@ int userNum;
 int main() {
 
     //welcome to the guessing game
-    std::cout << "Welcome to the guessing game! \n" << endl;
+    putchar("Welcome to the guessing game! \n");
 
     //ready player one
-    cout << "Are you ready to play? (Y/N): \n" << endl;
+    std::cout << "Are you ready to play? (Y/N): \n" << endl;
     //user ready response
     std::cin >> userReady;
     //to lowercase
     userReady = tolower(userReady);
 
+
+    //game
     while (userReady == "y") {
-
-    }
-
-
-
-
-
-
-    //process user ready response
-    switch(userReady) {
-        case 'y' :
-            cout << "Hooray! \n" << endl;
-            play = true;
-            break;
-        case 'n' :
-            cout << "Goodbye. \n" << endl;
-            play = false;
-            break;
-        default :
-            cout << "Invalid response." << endl;
-    }
-
-
-   //game
-    while (play) {
 
         //ask user to guess a number
         printf("Enter number from %d to %d \n", low, high);
+        //get user input
+        std::cin >> userNum;
 
-        //store user input
-        cin >> userNum;
-
-        //check if guess is an integer
-        if (isdigit(userNum)) {
-
-          //check if guess is within range
-          if (userNum < low || userNum > high) {
-
-              //error -- not within range
-              cout << "Not in range. Try again." << endl;
-
-              //reset failed state
-              cin.clear();
-
-              //ask user to guess a number
-              printf("Enter number from %d to %d \n", low, high);
-
-              //store user input
-              cin >> userNum;
-            }
-
-          //error -- not an integer
-        } else {
-
-              cout << "Not an number. Try again." << endl;
-
-              //reset failed state
-              cin.clear();
-
-              //ask user to guess a number
-              printf("Enter number from %d to %d \n", low, high);
-
-              //store user input
-              cin >> userNum;
-        }
-
-        //compare to computer random number
         if (userNum == randNum) {
-
-          //win if numbers match
-          cout << "You're a winner!" << endl;
-
-        } else if (userNum > randNum) {
-
-          //lose if guess is too high
-          cout << "You guessed too high. Try again." << endl;
-
-        } else if (userNum < randNum) {
-
-          //lose if guess is too low
-          cout << "You guessed too low. Try again." << endl;
+            cout << "You Win! \n" << endl;
+        }
+        else if ((userNum < randNum) && (userNum > 0)) {
+            cout << "You guessed too low. \n" << endl;
+        }
+        else if ((userNum > randNum) && (userNum < high + 1)) {
+            cout << "You guessed too high. \n" << endl;
+        }
+        else {
+            cout << "That doesn't appear to be a valid input. \n" << endl;
         }
 
+        //ready player one
+        cout << "Play again? (Y/N): \n" << endl;
+        //user ready response
+        cin >> userReady;
+        //to lowercase
+        userReady = tolower(userReady);
     }
 
     return 0;
-
 }
