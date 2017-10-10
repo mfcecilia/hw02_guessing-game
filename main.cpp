@@ -35,8 +35,8 @@ int userNum;
 //rounds
 int round = 0;
 
-//scoreboard -- 2*10 matrix showing responses
-int score[2][10];
+//scoreboard -- 2*5 matrix showing responses
+int score[2][5];
 
 //points until GAME OVER
 int points = 5;
@@ -65,7 +65,7 @@ void keepScore(char result){
     //loop rows
     for(int i = 0; i < 2; i++) {
         //loop columns
-        for (int j = 0; j < 10; j++) {
+        for (int j = 0; j < 5; j++) {
             cout << score[i][j] << "    ";
         }
         cout << endl;
@@ -96,7 +96,7 @@ void replay() {
         points = 5;
         //clear score board
         for (int a = 0; a < 2; a++){
-            for (int b = 0; b < 10; b++) {
+            for (int b = 0; b < 5; b++) {
                 score[a][b] = 0;
             }
         }
