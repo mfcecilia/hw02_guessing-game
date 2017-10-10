@@ -52,15 +52,16 @@ void keepScore(char result){
         //record responses
         score[0][round] = userNum;
         score[1][round] = randNum;
-
+        //move print responses here to avoid cheating when you lose
 
     //incorrect response
     } else {
         //record responses
         score[0][round] = userNum;
         score[1][round] = randNum;
+        //don't show responses so they can't see the answer
     }
-
+    //print responses
     //loop rows
     for(int i = 0; i < 2; i++) {
         //loop columns
@@ -69,6 +70,7 @@ void keepScore(char result){
         }
         cout << endl;
     }
+    cout << "\n" << endl;
 }
 
 
@@ -81,8 +83,11 @@ void replay() {
 
     //ready player one
     cout << "Play again? (Y/N): \n" << endl;
+    cout << "\n" << endl;
+
     //user ready response
     cin >> userReady;
+    cout << "\n" << endl;
 
     //reset game
     if (userReady == "y") {
@@ -98,9 +103,11 @@ void replay() {
     } else if (userReady == "n") {
         //exit game
         cout << "Thanks for playing! Goodbye!" << endl;
+        cout << "\n" << endl;
         return;
     } else {
         cout << "That doesn't appear to be a valid input. Goodbye." << endl;
+        cout << "\n" << endl;
         return;
     }
 }
@@ -109,21 +116,27 @@ void replay() {
 next round method -- starts the next round
 */
 void nextRound() {
+
     //subtract point
     points--;
     //show points
     printf("Your Score:  %d \n", points);
+    cout << "\n" << endl;
+
     //no points -- game over
     if (points == 0){
         cout << "GAME OVER \n" << endl;
+        cout << "\n" << endl;
         replay();
 
      //points left -- start next round
     } else {
         //ready player one
         cout << "Try again? (Y/N): \n" << endl;
+        cout << "\n" << endl;
         //user ready response
         cin >> userReady;
+        cout << "\n" << endl;
 
         //next round
         if (userReady == "y") {
@@ -132,11 +145,14 @@ void nextRound() {
         } else if (userReady == "n") {
             //show points
             printf("Your Score:  %d \n", points);
+            cout << "\n" << endl;
             //exit game
             cout << "Thanks for playing! Goodbye!" << endl;
+            cout << "\n" << endl;
             return;
         } else {
             cout << "That doesn't appear to be a valid input. Goodbye." << endl;
+            cout << "\n" << endl;
             return;
         }
     }
@@ -150,29 +166,41 @@ void gamePlay(){
     while (userReady == "y") {
         //ask user to guess a number
         printf("Enter number from %d to %d \n", low, high);
+        cout << "\n" << endl;
+
         //get user input
         cin >> userNum;
+        cout << "\n" << endl;
 
         if (userNum == randNum) {
             cout << "You Win! \n" << endl;
+            cout << "\n" << endl;
+
             //show points
             printf("Your Score:  %d \n", points);
+            cout << "\n" << endl;
+
             keepScore('win');
             replay();
         }
         else if ((userNum < randNum) && (userNum > 0)) {
             cout << "You guessed too low. \n" << endl;
+            cout << "\n" << endl;
+
             keepScore('lose');
             nextRound();
 
         }
         else if ((userNum > randNum) && (userNum < high + 1)) {
             cout << "You guessed too high. \n" << endl;
+            cout << "\n" << endl;
+
             keepScore('lose');
             nextRound();
         }
         else {
             cout << "That doesn't appear to be a valid input. Goodbye. \n" << endl;
+            cout << "\n" << endl;
             break;
         }
     }
@@ -188,12 +216,15 @@ int main() {
 
     //welcome to the guessing game
     cout << "Welcome to the guessing game! \n" << endl;
+    cout << "\n" << endl;
 
     //ready player one
     cout << "Are you ready to play? (Y/N): \n" << endl;
+    cout << "\n" << endl;
 
     //user ready response
     cin >> userReady;
+    cout << "\n" << endl;
 
     //game
     gamePlay();
