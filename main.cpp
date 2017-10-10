@@ -32,17 +32,119 @@ int randNum = (rand()%high)+low;
 //user number guess
 int userNum;
 
-//computer answer
-int computer;
-
-//player answer
-int player;
-
 //rounds
 int round = 0;
 
-//scoreboard -- 2*100 matrix
+//scoreboard -- 2*10 matrix
 int score[2][10];
+
+
+/*score method -- keeps and prints results*/
+void keepScore(char result){
+    if (result == 'win'){
+        score[0][round] = userNum;
+        score[1][round] = randNum;
+    } else {
+        score[0][round] = userNum;
+        score[1][round] = randNum;
+    }
+    //loop rows
+    for(int i = 0; i < 2; i++) {
+        //loop columns
+        for (int j = 0; j < 10; j++) {
+            cout << score[i][j] << "    ";
+        }
+        cout << endl;
+    }
+}
+
+/*replay method -- starts a new game*/
+void replay() {
+    //ready player one
+    cout << "Play again? (Y/N): \n" << endl;
+    //user ready response
+    cin >> userReady;
+
+    //reset game
+    if (userReady == "y") {
+        round = 0;
+        randNum = (rand()%high)+low;
+        //clear score board
+        for (int a = 0; a < 2; a++){
+            for (int b = 0; b < 10; b++) {
+                score[a][b] = 0;
+            }
+        }
+    } else if (userReady == "n") {
+        //exit game
+        cout << "Thanks for playing! Goodbye!" << endl;
+        return;
+    } else {
+        cout << "That doesn't appear to be a valid input. Goodbye." << endl;
+        return;
+    }
+}
+
+/*next round method -- starts the next round*/
+void nextRound() {
+    //ready player one
+    cout << "Try again? (Y/N): \n" << endl;
+    //user ready response
+    cin >> userReady;
+
+    //next round
+    if (userReady == "y") {
+        round++;
+    } else if (userReady == "n") {
+        //exit game
+        cout << "Thanks for playing! Goodbye!" << endl;
+        return;
+    } else {
+        cout << "That doesn't appear to be a valid input. Goodbye." << endl;
+        return;
+    }
+}
+
+/*game play*/
+void gamePlay(){
+
+    while (userReady == "y") {
+
+        //ask user to guess a number
+        printf("Enter number from %d to %d \n", low, high);
+        //get user input
+        cin >> userNum;
+
+        if (userNum == randNum) {
+            cout << "You Win! \n" << endl;
+            keepScore('win');
+            replay();
+        }
+        else if ((userNum < randNum) && (userNum > 0)) {
+            cout << "You guessed too low. \n" << endl;
+            keepScore('lose');
+            nextRound();
+
+        }
+        else if ((userNum > randNum) && (userNum < high + 1)) {
+            cout << "You guessed too high. \n" << endl;
+            keepScore('lose');
+            nextRound();
+        }
+        else {
+            cout << "That doesn't appear to be a valid input. Goodbye. \n" << endl;
+            break;
+        }
+    }
+}
+
+/*points method -- keeps track of player's points*/
+void points() {
+//start with 5 points
+//lose a point with each incorrect guess
+//cannot go into the negatives
+}
+
 
 
 
@@ -56,51 +158,12 @@ int main() {
 
     //ready player one
     cout << "Are you ready to play? (Y/N): \n" << endl;
+
     //user ready response
     cin >> userReady;
 
-
     //game
-    while (userReady == "y") {
-
-        //ask user to guess a number
-        printf("Enter number from %d to %d \n", low, high);
-        //get user input
-        cin >> userNum;
-
-        if (userNum == randNum) {
-            cout << "You Win! \n" << endl;
-            score[0][round] = userNum;
-            score[1][round] = randNum;
-        }
-        else if ((userNum < randNum) && (userNum > 0)) {
-            cout << "You guessed too low. \n" << endl;
-            score[0][round] = userNum;
-        }
-        else if ((userNum > randNum) && (userNum < high + 1)) {
-            cout << "You guessed too high. \n" << endl;
-            score[0][round] = userNum;
-        }
-        else {
-            cout << "That doesn't appear to be a valid input. \n" << endl;
-            break;
-        }
-
-        //loop rows
-        for(int i = 0; i < 2; i++) {
-            //loop columns
-            for (int j = 0; j < 10; j++) {
-                cout << score[i][j] << endl;
-            }
-        }
-
-        //ready player one
-        cout << "Play again? (Y/N): \n" << endl;
-        //next round
-        round++;
-        //user ready response
-        cin >> userReady;
-    }
+    gamePlay();
 
     return 0;
 }
