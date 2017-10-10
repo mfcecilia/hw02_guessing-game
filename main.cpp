@@ -32,6 +32,20 @@ int randNum = (rand()%high)+low;
 //user number guess
 int userNum;
 
+//computer answer
+int computer;
+
+//player answer
+int player;
+
+//rounds
+int round = 0;
+
+//scoreboard -- 2*100 matrix
+int score[2][10];
+
+
+
 /*
  * main method
  */
@@ -56,19 +70,34 @@ int main() {
 
         if (userNum == randNum) {
             cout << "You Win! \n" << endl;
+            score[0][round] = userNum;
+            score[1][round] = randNum;
         }
         else if ((userNum < randNum) && (userNum > 0)) {
             cout << "You guessed too low. \n" << endl;
+            score[0][round] = userNum;
         }
         else if ((userNum > randNum) && (userNum < high + 1)) {
             cout << "You guessed too high. \n" << endl;
+            score[0][round] = userNum;
         }
         else {
             cout << "That doesn't appear to be a valid input. \n" << endl;
+            break;
+        }
+
+        //loop rows
+        for(int i = 0; i < 2; i++) {
+            //loop columns
+            for (int j = 0; j < 10; j++) {
+                cout << score[i][j] << endl;
+            }
         }
 
         //ready player one
         cout << "Play again? (Y/N): \n" << endl;
+        //next round
+        round++;
         //user ready response
         cin >> userReady;
     }
