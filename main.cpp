@@ -35,10 +35,10 @@ int userNum;
 //rounds
 int round = 0;
 
-//scoreboard -- 2*10 matrix
+//scoreboard -- 2*10 matrix showing responses
 int score[2][10];
 
-//points
+//points until GAME OVER
 int points = 5;
 
 
