@@ -38,16 +38,29 @@ int round = 0;
 //scoreboard -- 2*10 matrix
 int score[2][10];
 
+//points
+int points = 5;
 
-/*score method -- keeps and prints results*/
+
+/*
+score method -- keeps and prints results
+*/
 void keepScore(char result){
+
+    //correct response
     if (result == 'win'){
+        //record responses
         score[0][round] = userNum;
         score[1][round] = randNum;
+
+
+    //incorrect response
     } else {
+        //record responses
         score[0][round] = userNum;
         score[1][round] = randNum;
     }
+
     //loop rows
     for(int i = 0; i < 2; i++) {
         //loop columns
@@ -58,8 +71,14 @@ void keepScore(char result){
     }
 }
 
-/*replay method -- starts a new game*/
+
+
+
+/*
+replay method -- starts a fresh new game
+*/
 void replay() {
+
     //ready player one
     cout << "Play again? (Y/N): \n" << endl;
     //user ready response
@@ -69,6 +88,7 @@ void replay() {
     if (userReady == "y") {
         round = 0;
         randNum = (rand()%high)+low;
+        points = 5;
         //clear score board
         for (int a = 0; a < 2; a++){
             for (int b = 0; b < 10; b++) {
@@ -85,31 +105,49 @@ void replay() {
     }
 }
 
-/*next round method -- starts the next round*/
+/*
+next round method -- starts the next round
+*/
 void nextRound() {
-    //ready player one
-    cout << "Try again? (Y/N): \n" << endl;
-    //user ready response
-    cin >> userReady;
+    //subtract point
+    points--;
+    //show points
+    printf("Your Score:  %d \n", points);
+    //no points -- game over
+    if (points == 0){
+        cout << "GAME OVER \n" << endl;
+        replay();
 
-    //next round
-    if (userReady == "y") {
-        round++;
-    } else if (userReady == "n") {
-        //exit game
-        cout << "Thanks for playing! Goodbye!" << endl;
-        return;
+     //points left -- start next round
     } else {
-        cout << "That doesn't appear to be a valid input. Goodbye." << endl;
-        return;
+        //ready player one
+        cout << "Try again? (Y/N): \n" << endl;
+        //user ready response
+        cin >> userReady;
+
+        //next round
+        if (userReady == "y") {
+            round++;
+
+        } else if (userReady == "n") {
+            //show points
+            printf("Your Score:  %d \n", points);
+            //exit game
+            cout << "Thanks for playing! Goodbye!" << endl;
+            return;
+        } else {
+            cout << "That doesn't appear to be a valid input. Goodbye." << endl;
+            return;
+        }
     }
 }
 
-/*game play*/
+/*
+game play
+*/
 void gamePlay(){
 
     while (userReady == "y") {
-
         //ask user to guess a number
         printf("Enter number from %d to %d \n", low, high);
         //get user input
@@ -117,6 +155,8 @@ void gamePlay(){
 
         if (userNum == randNum) {
             cout << "You Win! \n" << endl;
+            //show points
+            printf("Your Score:  %d \n", points);
             keepScore('win');
             replay();
         }
@@ -136,13 +176,6 @@ void gamePlay(){
             break;
         }
     }
-}
-
-/*points method -- keeps track of player's points*/
-void points() {
-//start with 5 points
-//lose a point with each incorrect guess
-//cannot go into the negatives
 }
 
 
