@@ -59,7 +59,7 @@ void keepScore(char result){
         //record responses
         score[0][round] = userNum;
         score[1][round] = randNum;
-        //don't show responses so they can't see the answer
+        //don't show responses so they can't see the answer and cheat
     }
     //print responses
     //loop rows
@@ -173,7 +173,7 @@ void gamePlay(){
         cout << "\n" << endl;
 
         if (userNum == randNum) {
-            cout << "You Win! \n" << endl;
+            cout << "YOU WIN! \n" << endl;
             cout << "\n" << endl;
 
             //show points
@@ -206,14 +206,7 @@ void gamePlay(){
     }
 }
 
-
-
-
-/*
- * main method
- */
-int main() {
-
+void welcome() {
     //welcome to the guessing game
     cout << "Welcome to the guessing game! \n" << endl;
     cout << "\n" << endl;
@@ -225,9 +218,20 @@ int main() {
     //user ready response
     cin >> userReady;
     cout << "\n" << endl;
+}
+
+
+/*
+ * main method -- because modularity is beautiful
+ */
+int main() {
+
+    //start
+    welcome();
 
     //game
     gamePlay();
 
+    //end
     return 0;
 }
